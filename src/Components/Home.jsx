@@ -1,9 +1,9 @@
-import useFetch from "../fetchData/useFetch";
+import useFetch from "./useFetch";
 import BlogList from "./BlogList"
 
 function Home() {
   const {data:blogs,isLoading,error} = useFetch("http://localhost:8000/blogs");
-
+  
   return (
     <>
       <div className="home">
