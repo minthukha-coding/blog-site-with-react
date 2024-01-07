@@ -4,22 +4,21 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("mario");
+  const [author, setAuthor] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const sumbitHandaler = (e) => {
     e.preventDefault();
-    const blog = { Blog_Title, Blog_Author, Blog_Content };
+    const blog = { title, author, body };
 
     setisLoading(true);
-    fetch("https://localhost:7241/api/BlogAdoDotNet", {
+    fetch("http://localhost:8000/blogs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
-    }).then(() => {
+    }).then(() => { 
       console.log("New blog add");
       setisLoading(false);
       navigate("/");
@@ -28,45 +27,32 @@ const Create = () => {
 
   return (
     <div className="create">
-      <h2>Add a New Blog</h2>
-      <form onSubmit={sumbitHandaler}>
-        <label>Blog title:</label>
-        <input
-          type="text"
-          required
-          value={Blog_Title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <label>Blog body:</label>
-        <textarea
-          required
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        ></textarea>
-        <label>Blog_Author:</label>
-        <input
-          type="text"
-          required
-          value={Blog_Author}
-          onChange={(e) => setContent(e.target.value)}
-        />
-               
-         <label>Blog Content:</label>
-        <input
-          type="text"
-          required
-          value={Blog_Content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-        {/* <label>Blog author:</label>
-        <select value={author} onChange={(e) => setAuthor(e.target.value)}>
-          <option value="mario">mario</option>
-          <option value="yoshi">yoshi</option>
-        </select> */}
-        {!isLoading && <button>Add Blog</button>}
-        {isLoading && <button>Addiing...</button>}
-      </form>
-    </div>
+    <h2>Add a New Blog</h2>
+    <form onSubmit={sumbitHandaler}>
+      <label>Blog title:</label>
+      <input 
+        type="text" 
+        required 
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <label>Blog body:</label>
+      <textarea
+        required
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+      ></textarea>
+      <label>Blog author:</label>
+      <select
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
+      >
+        <option value="mario">mario</option>
+        <option value="yoshi">yoshi</option>
+      </select>
+      <button>Add Blog</button>
+    </form>
+  </div>
   );
 };
 

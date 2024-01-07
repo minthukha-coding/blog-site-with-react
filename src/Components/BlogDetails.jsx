@@ -4,7 +4,7 @@ import useFetch from "./useFetch";
 
 
 const BlogDetails = () => {
-  const { id } = useParams();
+  const  { id } = useParams();
   const {
     data: blog,
     isLoading,

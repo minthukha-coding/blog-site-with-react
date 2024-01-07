@@ -22,7 +22,7 @@ const useFetch = (url) => {
               setisLoading(false);
               seterror(err.message);
             });
-        }, 100);
+        }, 10);
       }, [url]);
       return {data,isLoading,error}
 }
