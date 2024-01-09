@@ -9,11 +9,11 @@ const BlogDetails = () => {
     data: blog,
     isLoading,
     error,
-  } = useFetch("http://localhost:8000/blogs/" + id);
+  } = useFetch("https://localhost:7179/api/Blog/" + id);
   const navigate = useNavigate();
 
   const deleteAPI = () => {
-    fetch("http://localhost:8000/blogs/" + blog.id, {
+    fetch("https://localhost:7179/api/Blog/" + blog.blog_Id, {
       method: "DELETE",
     }).then(() => {
       navigate('/')
@@ -26,9 +26,9 @@ const BlogDetails = () => {
       {error && <div>{error}</div>}
       {blog && (
         <article>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-          <div>{blog.body}</div>
+          <h2>{blog.blog_Title}</h2>
+          <p>Written by {blog.blog_Author}</p>
+          <div>{blog.blog_Body}</div>
           <button onClick={deleteAPI}>Delete</button>
         </article>
       )}

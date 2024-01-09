@@ -2,23 +2,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
+  const [Blog_Title, setBlog_Title] = useState("");
+  const [Blog_Author, setBlog_Author] = useState("");
+  const [Blog_Body, setBlog_Body] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const sumbitHandaler = (e) => {
     e.preventDefault();
-    const blog = { title, author, body };
+    const blog = { Blog_Title, Blog_Author, Blog_Body };
 
     setisLoading(true);
-    fetch("http://localhost:8000/blogs", {
+    fetch("https://localhost:7179/api/Blog", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
-    }).then(() => { 
+    }).then(() => {
       console.log("New blog add");
       setisLoading(false);
       navigate("/");
@@ -27,32 +27,31 @@ const Create = () => {
 
   return (
     <div className="create">
-    <h2>Add a New Blog</h2>
-    <form onSubmit={sumbitHandaler}>
-      <label>Blog title:</label>
-      <input 
-        type="text" 
-        required 
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <label>Blog body:</label>
-      <textarea
-        required
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-      ></textarea>
-      <label>Blog author:</label>
-      <select
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-      >
-        <option value="mario">mario</option>
-        <option value="yoshi">yoshi</option>
-      </select>
-      <button>Add Blog</button>
-    </form>
-  </div>
+      <h2>Add a New Blog</h2>
+      <form onSubmit={sumbitHandaler}>
+        <label>Blog title:</label>
+        <input
+          type="text"
+          required
+          value={Blog_Title}
+          onChange={(e) => setBlog_Title(e.target.value)}
+        />
+        <label>Blog body:</label>
+        <textarea
+          required
+          value={Blog_Body}
+          onChange={(e) => setBlog_Body(e.target.value)}
+        ></textarea>
+        <label>Blog author:</label>
+        <input
+          type="text"
+          required
+          value={Blog_Author}
+          onChange={(e) => setBlog_Author(e.target.value)}
+        />
+        <button>Add Blog</button>
+      </form>
+    </div>
   );
 };
 
